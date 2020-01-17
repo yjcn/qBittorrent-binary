@@ -19,3 +19,15 @@ script:
   - ./configure --disable-debug --enable-encryption CXXFLAGS="-std=c++14"
   - make clean && make -j$(nproc)
   - sudo make install
+after_install:
+  - sudo apt-get install -y qtbase5-dev qttools5-dev-tools libqt5svg5-dev
+  - cd ..
+  - git clone https://github.com/qbittorrent/qBittorrent
+  - cd qBittorrent
+  - latesttag=$(git describe --tags)
+  - echo checking out ${latesttag}
+  - git checkout ${latesttag}
+  - ./configure --disable-gui CXXFLAGS="-std=c++14"
+  - make clean && make -j$(nproc)
+  - make install DESTDIR=$PWD/_install
+  - ./src/qbittorrent-nox -v
