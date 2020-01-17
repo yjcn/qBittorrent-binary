@@ -1,7 +1,4 @@
-on:
-  watch
-    types: [started]
-
+on: [started]
 jobs:
   libtorrent:
     runs-on: ubuntu-18.04
