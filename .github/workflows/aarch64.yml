@@ -21,4 +21,4 @@ jobs:
             ./autotool.sh
             ./configure --disable-debug --enable-encryption CXXFLAGS="-std=c++14"
              make clean && make -j$(nproc)
-             sudo make install
+             make install
