@@ -13,8 +13,8 @@ jobs:
           architecture: aarch64
           distribution: ubuntu18.04
           run: |
-            sudo apt-get install -y build-essential pkg-config automake libtool git zlib1g-dev
-            sudo apt-get install -y libboost-dev libboost-system-dev libboost-chrono-dev libboost-random-dev libssl-dev libgeoip-dev
+            apt-get install -y build-essential pkg-config automake libtool git zlib1g-dev
+            apt-get install -y libboost-dev libboost-system-dev libboost-chrono-dev libboost-random-dev libssl-dev libgeoip-dev
             git clone https://github.com/arvidn/libtorrent.git
             cd libtorrent
             ./autotool.sh
