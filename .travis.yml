@@ -20,7 +20,7 @@ script:
   - make clean && make -j$(nproc)
   - sudo make install
   - make install DESTDIR=$PWD/_intsall
-  - tar xvf libtorrent.tar ./_install
+  - tar cvf libtorrent.tar ./_install
   - sudo apt-get install -y qtbase5-dev qttools5-dev-tools libqt5svg5-dev
   - cd ..
   - mkdir  deploy
