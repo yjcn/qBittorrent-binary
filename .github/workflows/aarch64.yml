@@ -22,3 +22,14 @@ jobs:
             ./configure --disable-debug --enable-encryption CXXFLAGS="-std=c++14"
              make clean && make -j$(nproc)
              make install
+             apt-get install -y qtbase5-dev qttools5-dev-tools libqt5svg5-dev
+             cd ..
+             git clone https://github.com/qbittorrent/qBittorrent
+             cd qBittorrent
+             latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+             echo checking out ${latestTag}
+             git checkout ${latestTag}
+             ./configure --disable-gui CXXFLAGS="-std=c++14"
+             make clean && make -j$(nproc)
+             #make install DESTDIR=$PWD/_install
+             ./src/qbittorrent-nox -v
