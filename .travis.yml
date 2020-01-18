@@ -23,10 +23,10 @@ script:
   - cd ..
   - git clone https://github.com/qbittorrent/qBittorrent
   - cd qBittorrent
-  - latesttag=$(git describe --tags)
+  - latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
   - echo checking out ${latesttag}
   - git checkout ${latesttag}
   - ./configure --disable-gui CXXFLAGS="-std=c++14"
   - make clean && make -j$(nproc)
-  - make install DESTDIR=$PWD/_install
+#  - make install DESTDIR=$PWD/_install
   - ./src/qbittorrent-nox -v
