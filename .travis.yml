@@ -37,7 +37,7 @@ script:
   - tar cvf qbittorrent-nox.tar ./src/qbittorrent-nox
   - mv qbittorrent-nox.tar ../deploy/.
   - cd ..
- deploy:
+deploy:
   provider: releases
   api_key: $GITHUB_TOKEN
   file_glob: true
