@@ -36,7 +36,8 @@ script:
   - make clean && make -j$(nproc)
 #  - make install DESTDIR=$PWD/_install
   - ./src/qbittorrent-nox -v
-  - tar cvf qbittorrent-nox.tar ./src/qbittorrent-nox
+  - sudo make install
+  - tar cvf qbittorrent-nox.tar  /usr/local/bin/qbittorrent-nox
   - mv qbittorrent-nox.tar ../deploy/qbittorrent-nox_$ARCH.tar
   - cd ..
 deploy:
