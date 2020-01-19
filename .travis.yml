@@ -11,7 +11,8 @@ before_install:
   - echo $arch
   - sudo apt-get update
   - sudo apt-get install -y build-essential pkg-config automake libtool git zlib1g-dev
-  - sudo apt-get install -y libboost-dev libboost-system-dev libboost-chrono-dev libboost-random-dev libssl-dev libgeoip-dev
+  #- sudo apt-get install -y libboost-dev libboost-system-dev libboost-chrono-dev libboost-random-dev libssl-dev libgeoip-dev
+  - sudo apt-get install -y libboost1.67-dev libboost-system1.67-dev libboost-chrono1.67-dev libboost-random1.67-dev libssl-dev libgeoip-dev
 install: 
   - git clone https://github.com/arvidn/libtorrent.git
 script:
