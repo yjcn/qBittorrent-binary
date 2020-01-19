@@ -17,6 +17,9 @@ install:
   - git clone https://github.com/arvidn/libtorrent.git
 script:
   - cd libtorrent
+  - libtorrentlatestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+  - echo checking out ${libtorrentlatestTag}
+  - git checkout ${libtorrentlatestTag}
   - ./autotool.sh
   - ./configure --disable-debug --enable-encryption CXXFLAGS="-std=c++14"
   - make clean && make -j$(nproc)
@@ -27,7 +30,7 @@ script:
   - cd ..
   - mkdir  deploy
   - ARCH=`uname -m`
-  - mv libtorrent/libtorrent.tar deploy/libtorrent_$ARCH.tar
+  - mv libtorrent/libtorrent.tar deploy/libtorrent_$libtorrentlatestTag_$ARCH.tar
   - git clone https://github.com/qbittorrent/qBittorrent
   - cd qBittorrent
   - latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
@@ -39,7 +42,7 @@ script:
   - ./src/qbittorrent-nox -v
   - sudo make install
   - tar cvf qbittorrent-nox.tar  /usr/local/bin/qbittorrent-nox
-  - mv qbittorrent-nox.tar ../deploy/qbittorrent-nox_$ARCH.tar
+  - mv qbittorrent-nox.tar ../deploy/qbittorrent-nox_$latestTag_$ARCH.tar
   - cd ..
 deploy:
   provider: releases
