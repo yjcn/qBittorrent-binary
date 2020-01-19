@@ -20,12 +20,13 @@ script:
   - ./configure --disable-debug --enable-encryption CXXFLAGS="-std=c++14"
   - make clean && make -j$(nproc)
   - sudo make install
-  - make install DESTDIR=$PWD/_intsall
+  - make install DESTDIR=$PWD/_install
   - tar cvf libtorrent.tar _install
   - sudo apt-get install -y qtbase5-dev qttools5-dev-tools libqt5svg5-dev
   - cd ..
   - mkdir  deploy
-  - mv libtorrent/libtorrent.tar deploy/.
+  - ARCH=`uname -m`
+  - mv libtorrent/libtorrent.tar deploy/libtorrent_$ARCH.tar
   - git clone https://github.com/qbittorrent/qBittorrent
   - cd qBittorrent
   - latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
@@ -36,7 +37,7 @@ script:
 #  - make install DESTDIR=$PWD/_install
   - ./src/qbittorrent-nox -v
   - tar cvf qbittorrent-nox.tar ./src/qbittorrent-nox
-  - mv qbittorrent-nox.tar ../deploy/.
+  - mv qbittorrent-nox.tar ../deploy/qbittorrent-nox_$ARCH.tar
   - cd ..
 deploy:
   provider: releases
