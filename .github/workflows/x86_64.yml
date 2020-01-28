@@ -1,0 +1,30 @@
+on:
+  watch:
+    types: [started]
+jobs:
+  libtorrent:
+    runs-on: ubuntu-18.04
+    name: Build on aarch64 
+    steps:
+      - name: test
+        run: |
+          apt-get update
+          apt-get install -y build-essential pkg-config automake libtool git zlib1g-dev
+          apt-get install -y libboost-dev libboost-system-dev libboost-chrono-dev libboost-random-dev libssl-dev libgeoip-dev
+          git clone https://github.com/arvidn/libtorrent.git
+          cd libtorrent
+          ./autotool.sh
+          ./configure --disable-debug --enable-encryption CXXFLAGS="-std=c++14"
+           make clean && make -j$(nproc)
+           make install
+           apt-get install -y qtbase5-dev qttools5-dev-tools libqt5svg5-dev
+           cd ..
+           git clone https://github.com/qbittorrent/qBittorrent
+           cd qBittorrent
+           latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+           echo checking out ${latestTag}
+           git checkout ${latestTag}
+           ./configure --disable-gui CXXFLAGS="-std=c++14"
+           make clean && make -j$(nproc)
+           #make install DESTDIR=$PWD/_install
+           ./src/qbittorrent-nox -v
