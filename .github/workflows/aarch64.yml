@@ -11,7 +11,7 @@ jobs:
         id: runcmd
         with:
           architecture: armv7
-          distribution: ubuntu18.04
+          distribution: buster
           run: |
             apt-get update
             apt-get install -y build-essential pkg-config automake libtool git zlib1g-dev
